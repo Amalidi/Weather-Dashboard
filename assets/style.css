@@ -8,3 +8,19 @@ body {
   font-family: "Smokum", cursive;
   font-family: "Source Sans Pro", sans-serif;
 }
+
+.navbar .centre {
+  font-size: 3.2rem;
+  color: #fff;
+  text-align: center;
+  margin: auto;
+}
+
+.box {
+  text-decoration: none;
+  color: #fff;
+}
+
+.box:hover {
+  color: #161a1d;
+}
