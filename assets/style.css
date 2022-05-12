@@ -9,6 +9,11 @@ body {
   font-family: "Source Sans Pro", sans-serif;
 }
 
+.navbar {
+  color: #fff;
+  margin-bottom: 2rem;
+}
+
 .navbar .centre {
   font-size: 3.2rem;
   color: #fff;
