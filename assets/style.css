@@ -29,3 +29,11 @@ body {
 .box:hover {
   color: #161a1d;
 }
+
+.btn-outline-info {
+  color: #0096c7;
+}
+
+.btn-outline-info:hover {
+  background-color: #00b4d8;
+}
