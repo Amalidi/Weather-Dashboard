@@ -21,6 +21,14 @@ body {
   margin: auto;
 }
 
+.btn-primary {
+  background-color: #0096c7;
+}
+
+.btn-primary:hover {
+  background-color: #0077b6;
+}
+
 .box {
   text-decoration: none;
   color: #fff;
@@ -35,5 +43,13 @@ body {
 }
 
 .btn-outline-info:hover {
-  background-color: #00b4d8;
+  background-color: #0096c7;
+}
+
+.current-weather {
+  background-color: #495057;
+}
+
+.card-box {
+  align-items: center;
 }
