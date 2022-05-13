@@ -53,3 +53,7 @@ body {
 .card-box {
   align-items: center;
 }
+
+#forcast-card {
+  background-color: #495057;
+}

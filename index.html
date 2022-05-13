@@ -143,20 +143,32 @@
                 </div>
               </div>
             </div>
-            <!-- <div class="card-body d-flex">
-              <div class="card-info d-flex flex-column">
-                <p class="card-text">Temperature : 32 <span>&#8451;</span></p>
-                <p class="card-text">Humidity : 17 &percnt;</p>
-                <p class="card-text">Wind speed : 17 MPH</p>
-                <p class="card-text">
-                  UV Index :
-                  <span class="bg-success px-3 rounded-3">1.5</span>
-                </p>
-              </div>
-            </div> -->
           </div>
           <!-- 5-Day Forecast -->
-          <div>5-Day Forecast</div>
+          <div class="forecast-box" id="forecast-container">
+            <h2 class="forecast-title pl-3 pr-3">5-Day Forecast</h2>
+            <div
+              class="forecast d-flex flex-row flex-wrap pt-3 pb-3 justify-content-between"
+            >
+              <div id="forcast-card"
+                class="forecast-card d-flex flex-column align-items-center text-white m-1 p-4"
+              >
+                <h4 class="card-header w-100 text-center">MM/DD/YY</h4>
+                <div class="card-body">
+                  <p class="card-text text-center">
+                    <img
+                    src="http://openweathermap.org/img/w/04d.png"
+                    alt="weather icon"
+                  />
+                  </p>
+                  <p class="card-text text-center">
+                    Temp : 28 <span>&#8451;</span>
+                  </p>
+                  <p class="card-text text-center">Humidity : 16%</p>
+                  <p class="card-text text-center">Wind Speed : 20 MPH</p>
+                  <p class="card-text text-center">UV Index: <span class="bg-success text-white px-3 rounded-2"> 1.5</span></p>
+                </div>
+              </div>
         </div>
       </div>
     </main>
