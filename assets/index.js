@@ -1,5 +1,7 @@
 // targeting recent searches
 const recentSearchesContainer = $("#recent-searches-container");
+// targeting form
+const searchForm = $("#search-form");
 
 const readFromLocalStorage = (key, defaultValue) => {
     // get from LS using key name
@@ -14,6 +16,14 @@ const readFromLocalStorage = (key, defaultValue) => {
       return defaultValue;
     }
   };
+
+  const writeToLocalStorage = (key, value) => {
+    // convert value to string
+    const stringifiedValue = JSON.stringify(value);
+  
+    // set stringified value to LS for key name
+    localStorage.setItem(key, stringifiedValue);
+  }; 
 
   const renderRecentSearches = () => {
     const recentSearches = readFromLocalStorage("rencentSearches", []);
@@ -32,9 +42,8 @@ const readFromLocalStorage = (key, defaultValue) => {
 
         const recentCities = recentSearches.map(createRecentCity).join("");
 
-        console.log(recentCities)
       //   render recent searches list
-      const ul = `<ul class="list-group p-3" id="city-list">
+      const ul = `<ul class="list-group p-3">
          ${recentCities}
         </ul>`;
         recentSearchesContainer.append(ul);
@@ -53,16 +62,73 @@ const handleRecentSearchClick = (event) => {
     // check if the target is a list item 
     if(target.is("li")){
         // get data attribute
-        const cityName = target.attr("data-city")
+        const cityName = target.attr("data-city");
         console.log(cityName)
     }
-}
+};
 
+// const handleFormSubmit = (event) => {
+//     event.preventDefault();
+
+//     // form input
+//     const cityName = $("#search-input").val();
+
+//     // validate
+//     if(cityName){
+
+//         const recentSearches = readFromLocalStorage("recentSearches", []);
+
+//         // city name into an array
+//         recentSearches.push(cityName);
+
+//         // write recent searches to LS
+//         writeToLocalStorage("recentSearches", recentSearches);
+
+//         // remove previous items
+//         recentSearchesContainer.children().last().remove();
+
+//         // re-render recent cities
+//         renderRecentSearches();
+
+//     }
+// };
+
+const handleFormSubmit = (event) => {
+    event.preventDefault();
+  
+    // get form input value
+    const cityName = $("#search-input").val();
+  
+    // validate
+    if (cityName) {
+        console.log(cityName)
+      // get recentSearches from LS
+      const recentSearches = readFromLocalStorage("recentSearches", []);
+  
+      // push city name to array
+      recentSearches.push(cityName);
+  
+      // write recent searches to LS
+      writeToLocalStorage("recentSearches", recentSearches);
+  
+      // remove previous items
+      recentSearchesContainer.children().last().remove();
+  
+      // re-render recent cities
+      renderRecentSearches();
+
+    }
+  };
 
 const onReady= () => {
-  renderRecentSearches()
+  renderRecentSearches();
 
 };
 
-recentSearchesContainer.click(handleRecentSearchClick)
+recentSearchesContainer.click(handleRecentSearchClick);
+searchForm.submit(handleFormSubmit);
 $(document).ready(onReady);
+
+
+
+
