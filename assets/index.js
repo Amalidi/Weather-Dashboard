@@ -56,8 +56,8 @@ const readFromLocalStorage = (key, defaultValue) => {
         <div class="card-header d-flex">
             <h3 id="cityName">${data.cityName}</h3>
             <h3 class="px-5" id="currentdate">${moment
-            .unix(1652526000)
-            .format("dddd, Do MMM, YYYY")}</h3>
+            .unix(1652612400)
+            .format("ddd, Do MMM")}</h3>
             <div class="card-box text-center">
             <img
                 src="http://openweathermap.org/img/w/${data.weatherData.current.weather[0].icon}.png"
@@ -98,92 +98,42 @@ const readFromLocalStorage = (key, defaultValue) => {
         weatherInfoContainer.append(currentWeatherCard);
   };
 
-  const renderForecastData = () => {
+  const renderForecastData = (data) => {
+      const createForecastCard = (each) => {
+          const forecast = `<div
+            id="forcast-card"
+            class="forecast-card d-flex flex-column align-items-center text-white m-1 p-4"
+            >
+            <h4 class="card-header w-100 text-center">
+            ${moment.unix(each.dt).format("ddd, Do MMM")}
+            </h4>
+            <div class="card-body">
+                <p class="card-text text-center">
+                <img src="http://openweathermap.org/img/w/${each.weather[0].icon}.png" alt="weather icon" />
+                </p>
+                <p class="card-text text-center">Temp : ${each.temp.day} <span>&#8451;</span></p>
+                <p class="card-text text-center">Humidity : ${each.humidity}%</p>
+                <p class="card-text text-center">Wind Speed : ${each.wind_speed} MPH</p>
+                <p class="card-text text-center">
+                UV Index:
+                <span class="bg-success text-white px-3 rounded-2">${each.uvi}</span>
+                </p>
+            </div>
+            </div>`;
+
+            return forecast;
+      };
+      const forecastCards = data.weatherData.daily.slice(1, 6).map(createForecastCard).join("");
       const forecastWeatherCards = `<div class="forecast-box" id="forecast-container">
-        <h2 class="forecast-title pl-3 pr-3 text-center">5-Day Forecast</h2>
-        <div
-            class="forecast d-flex flex-row flex-wrap pt-3 pb-3 justify-content-between"
-        >
-            <!-- card 1 -->
-            <div
-            id="forcast-card"
-            class="forecast-card d-flex flex-column align-items-center text-white m-1 p-4"
-            >
-            <h4 class="card-header w-100 text-center">MM/DD/YY</h4>
-            <div class="card-body">
-                <p class="card-text text-center">
-                <img
-                    src="http://openweathermap.org/img/w/04d.png"
-                    alt="weather icon"
-                />
-                </p>
-                <p class="card-text text-center">
-                Temp : 28 <span>&#8451;</span>
-                </p>
-                <p class="card-text text-center">Humidity : 16%</p>
-                <p class="card-text text-center">Wind Speed : 20 MPH</p>
-                <p class="card-text text-center">
-                UV Index:
-                <span class="bg-success text-white px-3 rounded-2">
-                    1.5</span
-                >
-                </p>
-            </div>
-            </div>
-            <div
-            id="forcast-card"
-            class="forecast-card d-flex flex-column align-items-center text-white m-1 p-4"
-            >
-            <h4 class="card-header w-100 text-center">MM/DD/YY</h4>
-            <div class="card-body">
-                <p class="card-text text-center">
-                <img
-                    src="http://openweathermap.org/img/w/04d.png"
-                    alt="weather icon"
-                />
-                </p>
-                <p class="card-text text-center">
-                Temp : 28 <span>&#8451;</span>
-                </p>
-                <p class="card-text text-center">Humidity : 16%</p>
-                <p class="card-text text-center">Wind Speed : 20 MPH</p>
-                <p class="card-text text-center">
-                UV Index:
-                <span class="bg-success text-white px-3 rounded-2">
-                    1.5</span
-                >
-                </p>
-            </div>
-            </div>
-            <div
-            id="forcast-card"
-            class="forecast-card d-flex flex-column align-items-center text-white m-1 p-4"
-            >
-            <h4 class="card-header w-100 text-center">MM/DD/YY</h4>
-            <div class="card-body">
-                <p class="card-text text-center">
-                <img
-                    src="http://openweathermap.org/img/wn/04d@2x.png"
-                    alt="weather icon"
-                />
-                </p>
-                <p class="card-text text-center">
-                Temp : 28 <span>&#8451;</span>
-                </p>
-                <p class="card-text text-center">Humidity : 16%</p>
-                <p class="card-text text-center">Wind Speed : 20 MPH</p>
-                <p class="card-text text-center">
-                UV Index:
-                <span class="bg-success text-white px-3 rounded-2">
-                    1.5</span
-                >
-                </p>
-            </div>
-            </div>
-        </div>
-        </div>`
+      <h2 class="forecast-title pl-3 pr-3 text-center">5-Day Forecast</h2>
+      <div
+        class="forecast d-flex flex-row flex-wrap pt-3 pb-3 justify-content-between"
+      >
+    ${forecastCards}
+      </div>
+    </div>`;
         weatherInfoContainer.append(forecastWeatherCards);
-  }
+  };
 
   const renderRecentSearches = () => {
     const recentSearches = readFromLocalStorage("rencentSearches", []);
@@ -216,6 +166,17 @@ const readFromLocalStorage = (key, defaultValue) => {
       recentSearchesContainer.append(alert)
     }
   };
+
+  const renderWeatherInfo = () => {
+      // fetch weather data
+      const weatherData = await fetchWeatherData(cityName);
+      // render current date
+      renderCurrentData(weatherData);
+
+      // render forcast data
+      renderForecastData(weatherData);
+
+  }
 
   const fetchWeatherData = async (cityName) => {
       // data from Api
@@ -267,6 +228,8 @@ const handleRecentSearchClick = (event) => {
     }
 };
 
+
+
 const handleFormSubmit = async (event) => {
     event.preventDefault();
   
@@ -275,15 +238,6 @@ const handleFormSubmit = async (event) => {
   
     // validate
     if (cityName) {
-        // fetch weather data
-        const weatherData = await fetchWeatherData(cityName);
-
-
-        // render current date
-        renderCurrentData(weatherData);
-
-        // render forcast data
-        renderForecastData(weatherData);
 
         console.log(cityName)
       // get recentSearches from LS
