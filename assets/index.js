@@ -167,9 +167,12 @@ const readFromLocalStorage = (key, defaultValue) => {
     }
   };
 
-  const renderWeatherInfo = () => {
+  const renderWeatherInfo = async (cityName) => {
       // fetch weather data
       const weatherData = await fetchWeatherData(cityName);
+      //   empty conatiner 
+      weatherInfoContainer.empty();
+
       // render current date
       renderCurrentData(weatherData);
 
@@ -238,6 +241,8 @@ const handleFormSubmit = async (event) => {
   
     // validate
     if (cityName) {
+        // render weather data cards
+        await renderWeatherInfo(cityName);
 
         console.log(cityName)
       // get recentSearches from LS
