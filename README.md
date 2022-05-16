@@ -33,7 +33,7 @@ The application provides the user with the following:
 
 # Links to URL & GitHub Repo
 
-Link to the Github Repository (dev branch):[https://github.com/Amalidi/Weather-Dashboard/tree/dev]()
+Link to the Github Repository (dev branch):[https://github.com/Amalidi/Weather-Dashboard/tree/dev]
 
 Link to the deployed URL: [https://amalidi.github.io/Weather-Dashboard/]
 

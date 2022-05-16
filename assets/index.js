@@ -73,8 +73,10 @@ const renderCurrentData = (data) => {
         <div class="card-header d-flex">
             <h3 id="cityName">${data.cityName}</h3>
             <h3 class="px-5" id="currentdate">${moment
-              .unix(1652612400)
-              .format("ddd, Do MMM")}</h3>
+              .unix(
+                data.weatherData.current.dt + data.weatherData.timezone_offset
+              )
+              .format("ddd, Do MMM, YYYY")}</h3>
             <div class="card-box text-center">
             <img
                 src="http://openweathermap.org/img/w/${
