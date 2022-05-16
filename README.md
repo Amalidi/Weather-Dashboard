@@ -39,4 +39,4 @@ Link to the deployed URL: [https://amalidi.github.io/-Password-Generator/]()
 
 # Screenshot of the App
 
-![Image of the project](./assets/Images/weather-dashboard.png)
+![Image of the project](./assets/images/weather-dashboard.png)
