@@ -20,15 +20,21 @@ The application provides the user with the following:
 The application provides the user with the following:
 
 . 5 cards are displayed to the user
+
 . Each Forcast card displays the current location, each representing exactly 24 hours ahead of the previous card, the relevant date, a weather icon, temperature , humidty and the UV index.
 
 # Technologies used
 
 . HTML
+
 . CSS
+
 . Javascript
+
 . Jquery
+
 . Third Party APIs
+
 . Bootstrap
 
 # Links to URL & GitHub Repo
